@@ -10,7 +10,7 @@ func (p Int64Slice) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
 
 type order bool
 
-var (
+const (
 	ASC  order = true
 	DESC order = false
 )
