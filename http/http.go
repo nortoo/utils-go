@@ -14,7 +14,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-// Downloader downloads a file to a specific path from an url.
+// Downloader downloads a file to a specific path from a url.
 // Deprecated
 func Downloader(url, output string, perm os.FileMode, retry uint) error {
 	baseDir := filepath.Base(output)
@@ -35,6 +35,9 @@ func Downloader(url, output string, perm os.FileMode, retry uint) error {
 	for i := 1; i <= int(retry); i++ {
 		resp, err = http.Get(url)
 		if err != nil {
+			if uint(i) == retry {
+				return err
+			}
 			time.Sleep(time.Duration(math.Pow(2, float64(i))) * time.Second)
 			continue
 		} else {
@@ -89,7 +92,7 @@ Loop:
 	return nil
 }
 
-// URLDownloader downloads a file to a specific path from an url.
+// URLDownloader downloads a file to a specific path from a url.
 func URLDownloader(url, output string, retry uint) (err error) {
 	for i := 1; i <= int(retry); i++ {
 		err = doURLDownloader(url, output)
