@@ -2,8 +2,9 @@ package math
 
 import (
 	"fmt"
-	"github.com/nortoo/utils-go/type"
 	"strconv"
+
+	"github.com/nortoo/utils-go/type"
 )
 
 // Decimal returns a specific precise decimal.

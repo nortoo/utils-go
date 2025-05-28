@@ -3,7 +3,7 @@ package _type
 import "reflect"
 
 // Contains returns whether the collection contains the element.
-// the collection supports array, slice, and map.
+// The collection supports array, slice, and map.
 func Contains(collection interface{}, that interface{}) bool {
 	targetValue := reflect.ValueOf(collection)
 	switch reflect.TypeOf(collection).Kind() {
@@ -17,6 +17,9 @@ func Contains(collection interface{}, that interface{}) bool {
 		if targetValue.MapIndex(reflect.ValueOf(that)).IsValid() {
 			return true
 		}
+	default:
+		return false
 	}
+
 	return false
 }

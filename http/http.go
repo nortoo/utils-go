@@ -10,8 +10,7 @@ import (
 	"path/filepath"
 	"time"
 
-	grab "github.com/cavaliergopher/grab/v3"
-
+	"github.com/cavaliergopher/grab/v3"
 	"github.com/pkg/errors"
 )
 

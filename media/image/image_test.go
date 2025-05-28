@@ -2,8 +2,9 @@ package image
 
 import (
 	"fmt"
-	"github.com/nortoo/utils-go/constant"
 	"testing"
+
+	"github.com/nortoo/utils-go/constant"
 )
 
 var samples = map[string]string{

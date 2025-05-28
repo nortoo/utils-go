@@ -8,11 +8,11 @@ import (
 	"path/filepath"
 	"strings"
 
-	. "github.com/nortoo/utils-go/constant"
 	_file "github.com/nortoo/utils-go/file"
 	_type "github.com/nortoo/utils-go/type"
 
 	"github.com/disintegration/imaging"
+	. "github.com/nortoo/utils-go/constant"
 	"github.com/pkg/errors"
 )
 

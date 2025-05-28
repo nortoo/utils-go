@@ -4,10 +4,11 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/nortoo/utils-go/shell"
 	"path"
 	"strconv"
 	"strings"
+
+	"github.com/nortoo/utils-go/shell"
 )
 
 func GetUncompressedFileSize(file string) (int64, error) {
