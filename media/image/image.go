@@ -9,7 +9,7 @@ import (
 	"strings"
 
 	_file "github.com/nortoo/utils-go/file"
-	_type "github.com/nortoo/utils-go/type"
+	"github.com/nortoo/utils-go/types"
 
 	"github.com/disintegration/imaging"
 	. "github.com/nortoo/utils-go/constant"
@@ -18,7 +18,7 @@ import (
 
 // IsSupportedImage returns whether the file is an image file.
 func IsSupportedImage(filename string) bool {
-	return _type.Contains(supportedImageFormats, MediaType(strings.ToLower(path.Ext(filename))))
+	return types.Contains(supportedImageFormats, MediaType(strings.ToLower(path.Ext(filename))))
 }
 
 // Dimensions return the image's dimensions.
@@ -73,7 +73,7 @@ func Resize(file, dstDir string, width, height, imageQuality int) error {
 	return imaging.Save(image, dst, imaging.JPEGQuality(imageQuality))
 }
 
-// Convert an image to other format.
+// Convert an image to another format.
 func Convert(file, dstDir string, format MediaType) error {
 	targetFormat := format.String()
 
