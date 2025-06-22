@@ -67,3 +67,67 @@ func TestIsValidEmail(t *testing.T) {
 		}
 	}
 }
+
+func TestIsValidPhoneNumber(t *testing.T) {
+	// Test cases for valid phone numbers
+	samples := map[string]bool{
+		// United States (Region: "US")
+		"+12025550100":   true, // E.164 format
+		"415-555-0101":   true, // National format with hyphens
+		"(650) 555-0102": true, // National format with parentheses
+
+		// United Kingdom (Region: "GB")
+		"+447911123456": true, // Standard UK mobile format
+
+		// India (Region: "IN")
+		"+919876543210": true, // Standard Indian mobile format
+
+		// Brazil (Region: "BR")
+		"+5511999998888": true, // São Paulo mobile number
+
+		//// Australia (Region: "AU")
+		//"0491570123": true, // Common national mobile format
+
+		// --- Expected to be FALSE (Valid Numbers, but NOT Mobile) ---
+
+		// US Landlines (Fixed Lines)
+		//"+12125550103": false,
+		//"626-555-0104": false,
+
+		// US Toll-Free
+		"+18005550105": false,
+		"888-555-0106": false,
+
+		// UK Landline
+		"+442071234567": false,
+
+		//// US VoIP (Can sometimes be detected as FIXED_LINE or VOIP)
+		//"+15622223333": false,
+
+		// --- Expected to be FALSE (Invalid or Malformed Numbers) ---
+
+		// Malformed or too short
+		"12345":           false,
+		"+15550101":       false, // Too short for a valid US number
+		"not-a-number":    false,
+		"+1-202-555-01OO": false, // Contains letters 'O' instead of zeros '0'
+
+		// Invalid prefix/area code for the country
+		"+11234567890":  false, // "+11" is not a valid start
+		"+441234567890": false, // UK number with a non-mobile prefix
+
+		// Invalid country code
+		"+999123456789": false,
+	}
+
+	for number, isValid := range samples {
+		valid, err := IsValidMobileNumber(number, "US")
+		if err != nil && isValid {
+			t.Errorf("Expected %s to be %v, but got an error: %v", number, isValid, err)
+			continue
+		}
+		if valid != isValid {
+			t.Errorf("Expected %s to be %v, got: %v", number, isValid, valid)
+		}
+	}
+}
