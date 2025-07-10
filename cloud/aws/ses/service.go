@@ -6,7 +6,7 @@ import (
 )
 
 type Service interface {
-	Send() error
+	Send(from string, to []string, content *Content) error
 }
 
 func (c *Client) Send(from string, to []string, content *Content) error {
