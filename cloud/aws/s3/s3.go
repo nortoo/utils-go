@@ -33,7 +33,7 @@ const (
 func (c *Client) Upload(pt, bucket, key string, acl s3ObjectACL, retry uint) error {
 	f, err := os.Open(pt)
 	if err != nil {
-		return nil
+		return err
 	}
 	defer f.Close()
 	contentType := _file.GetMIMEByReadingFile(*f)
